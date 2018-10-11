@@ -1,0 +1,5 @@
+﻿  GeometryFun2.cpp
+c:\users\mccollumn\source\repos\geometryfun2\geometryfun2\geometryfun2.cpp(20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\mccollumn\source\repos\geometryfun2\geometryfun2\geometryfun2.cpp(20): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+c:\users\mccollumn\source\repos\geometryfun2\geometryfun2\geometryfun2.cpp(43): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  GeometryFun2.vcxproj -> C:\Users\mccollumn\source\repos\GeometryFun2\Debug\GeometryFun2.exe

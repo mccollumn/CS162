@@ -14,10 +14,11 @@
 
 using namespace std;
 
-const float PI = 3.14159f;
+const float PI = 3.1415f;
 
 int main() {
-	int userInput;
+	
+	int userInput = 0;
 	int perimeter, areaSquare;
 	double radius, circumference, areaCircle;
 
@@ -27,7 +28,7 @@ int main() {
 
 	// Compute values
 	perimeter = userInput * 4;
-	areaSquare = userInput * userInput;
+	areaSquare = pow(userInput, 2);
 	radius = userInput / 2.0;
 	circumference = 2 * PI * radius;
 	areaCircle = PI * pow(radius, 2.0);
