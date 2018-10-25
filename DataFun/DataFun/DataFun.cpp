@@ -52,12 +52,12 @@ Part 2:
 Prompt user for a character
 Input a character
 
-if (character >= 48 AND character <= 57) then
+if (character >= 0 AND character <= 9) then
 	character is a number
-else if (character >= 65 AND character <= 90) then
+else if (character >= A AND character <= Z) then
 	character is upper case
 	set isLetter flag to true
-else if (character >= 97 AND character <= 122) then
+else if (character >= a AND character <= z) then
 	character is lower case
 	set isLetter flag to true
 	set isLowerCase flag to true
@@ -66,16 +66,12 @@ if (character is a letter) then
 	Switch based on character
 		Case a:
 		Case A:
-			it is a vowel
 		Case e:
 		Case E:
-			it is a vowel
 		Case i:
 		Case I:
-			it is a vowel
 		Case o:
 		Case O:
-			it is a vowel
 		Case u:
 		Case U:
 			it is a vowel
@@ -117,6 +113,7 @@ int main() {
 	cin >> userInt;
 
 	// Compute and print output
+	// Determine if the integer is positive or negative
 	if (userInt >= 0) {
 		cout << "\t" << userInt << " is a positive number,\n";
 	}
@@ -124,6 +121,7 @@ int main() {
 		cout << "\t" << userInt << " is a negative number,\n";
 	}
 
+	// Determine if the integer is greater than 1000, 100, or 10
 	if (userInt > 1000) {
 		cout << "\tit is greater than 1000,\n";
 	}
@@ -134,6 +132,7 @@ int main() {
 		cout << "\tit is greater than 10,\n";
 	}
 
+	// Determine if the integer is even or odd
 	if (userInt % 2 == 0) {
 		cout << "\tit is even,\n";
 	}
@@ -141,6 +140,7 @@ int main() {
 		cout << "\tit is odd,\n";
 	}
 
+	// Determine if the integer is the atomic number of a noble gas
 	switch (userInt) {
 	case 2:
 		cout << "\tand it is the atomic number of helium.\n";
@@ -171,37 +171,31 @@ int main() {
 	cin >> userChar;
 
 	// Compute and print output
-	if (userChar >= 48 && userChar <= 57) {
+	// Determine if the character is a number, uppercase letter, or lowercase letter
+	if (userChar >= '0' && userChar <= '9') {
 		cout << "\t" << userChar << " is a numeric digit,\n";
 	}
-	else if (userChar >= 65 && userChar <= 90) {
+	else if (userChar >= 'A' && userChar <= 'Z') {
 		cout << "\t" << userChar << " is an uppercase letter,\n";
 		isLetter = true;
 	}
-	else if (userChar >= 97 && userChar <= 122) {
+	else if (userChar >= 'a' && userChar <= 'z') {
 		cout << "\t" << userChar << " is a lowercase letter,\n";
 		isLetter = true;
 		isLowerCase = true;
 	}
 
+	// Determine if the character is a vowel
 	if (isLetter) {
 		switch (userChar) {
 		case 'a':
 		case 'A':
-			cout << "\tit is a vowel,\n";
-			break;
 		case 'e':
 		case 'E':
-			cout << "\tit is a vowel,\n";
-			break;
 		case 'i':
 		case 'I':
-			cout << "\tit is a vowel,\n";
-			break;
 		case 'o':
 		case 'O':
-			cout << "\tit is a vowel,\n";
-			break;
 		case 'u':
 		case 'U':
 			cout << "\tit is a vowel,\n";
@@ -211,8 +205,10 @@ int main() {
 		}
 	}
 	
+	// Print the character's ASCII value
 	cout << "\tits ACSII value is " << static_cast<int>(userChar) << ",\n";
 
+	// Determine the character's position in the alphabet
 	if (isLetter) {
 		if (isLowerCase) {
 			alphabetPosition = static_cast<int>(userChar) - 96;
