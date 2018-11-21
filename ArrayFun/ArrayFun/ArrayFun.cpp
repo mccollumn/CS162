@@ -70,7 +70,7 @@ int getDuplicateValues(const int userValues[], int outputValues[]);
 
 int main() {
 	int userValues[NUMBER_OF_VALUES];
-	int outputValues[NUMBER_OF_VALUES];
+	int outputValues[NUMBER_OF_VALUES / 2];
 
 	// Get input from user
 	getData(userValues);
@@ -107,7 +107,7 @@ void printData(const int outputValues[], int arraySize) {
 int lowestValue(const int userValues[]) {
 	int lowest = userValues[0];
 	for (int i = 1; i < NUMBER_OF_VALUES; i++) {
-		if (userValues[i] < userValues[i - 1]) {
+		if (userValues[i] < lowest) {
 			lowest = userValues[i];
 		}
 	}
@@ -117,7 +117,7 @@ int lowestValue(const int userValues[]) {
 int highestValue(const int userValues[]) {
 	int highest = userValues[0];
 	for (int i = 1; i < NUMBER_OF_VALUES; i++) {
-		if (userValues[i] > userValues[i - 1]) {
+		if (userValues[i] > highest) {
 			highest = userValues[i];
 		}
 	}
@@ -146,7 +146,7 @@ int getDuplicateValues(const int userValues[], int outputValues[]) {
 	int outputCounter = 0;
 	for (int i = 1; i < NUMBER_OF_VALUES; i++) {
 		bool duplicate = false;
-		for (int x = 0; x < i && duplicate == false; x++) {
+		for (int x = 0; x < i && !duplicate; x++) {
 			if (userValues[i] == userValues[x]) {
 				duplicate = true;
 				if (outputCounter == 0) {
@@ -155,7 +155,7 @@ int getDuplicateValues(const int userValues[], int outputValues[]) {
 				}
 				else {
 					bool outputDuplicate = false;
-					for (int o = 0; o < outputCounter; o++) {
+					for (int o = 0; o < outputCounter && !outputDuplicate; o++) {
 						if (userValues[i] == outputValues[o]) {
 							outputDuplicate = true;
 						}
