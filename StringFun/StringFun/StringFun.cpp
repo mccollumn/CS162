@@ -244,14 +244,3 @@ void lowerString(const string origString, string& lowerString) {
 		lowerString += tolower(origString[i]);
 	}
 }
-
-
-/*
-Questions:
-Best practice... use functions for all output?
-Overloading almost all functions.  Is this the best way?
-Why doesn't this work in lowerString():
-	char ch = origString[i];
-	lowerString[i] = tolower(ch);
-
-*/
