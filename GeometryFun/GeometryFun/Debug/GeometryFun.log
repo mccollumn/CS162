@@ -1,3 +1,0 @@
-﻿  GeometryFun.cpp
-c:\users\mccollumn\source\repos\geometryfun\geometryfun\geometryfun.cpp(31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-  GeometryFun.vcxproj -> C:\Users\mccollumn\source\repos\GeometryFun\Debug\GeometryFun.exe

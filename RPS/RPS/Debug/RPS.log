@@ -1,5 +1,0 @@
-﻿  rps.cpp
-c:\users\mccollumn\source\repos\rps\rps\rps.cpp(20): warning C4326: return type of 'main' should be 'int' instead of 'void'
-c:\users\mccollumn\source\repos\rps\rps\rps.cpp(25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\mccollumn\source\repos\rps\rps\rps.cpp(102): warning C4715: 'getPlayerChoice': not all control paths return a value
-  RPS.vcxproj -> C:\Users\mccollumn\source\repos\RPS\Debug\RPS.exe

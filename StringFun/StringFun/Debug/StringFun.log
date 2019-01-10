@@ -1,5 +1,0 @@
-﻿  StringFun.cpp
-c:\users\mccollumn\source\repos\stringfun\stringfun\stringfun.cpp(199): warning C4018: '<': signed/unsigned mismatch
-c:\users\mccollumn\source\repos\stringfun\stringfun\stringfun.cpp(207): warning C4018: '<': signed/unsigned mismatch
-c:\users\mccollumn\source\repos\stringfun\stringfun\stringfun.cpp(243): warning C4018: '<': signed/unsigned mismatch
-  StringFun.vcxproj -> C:\Users\mccollumn\source\repos\StringFun\Debug\StringFun.exe
