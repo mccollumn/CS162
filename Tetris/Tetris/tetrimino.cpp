@@ -8,7 +8,6 @@
 */
 
 #include <ctime>
-#include <cstdlib>
 #include <iostream>
 #include "tetrimino.h"
 
@@ -17,8 +16,7 @@ using namespace std;
 const int NUM_TETRIMINOS = 7;
 
 Tetrimino::Tetrimino(int type) {
-	location.row = 0;
-	location.col = 0;
+	location = { 0, 0 };
 
 	if (type < 0 || type > 6) {
 		type = randType();
@@ -30,17 +28,7 @@ Tetrimino::Tetrimino(int type) {
 	color = colors[type];
 }
 
-int Tetrimino::randType() {
-	static bool firstTime = true;
-	if (firstTime) {
-		srand(static_cast<unsigned int>(time(NULL)));
-		firstTime = false;
-	}
-	return rand() % 7;
-}
-
 void Tetrimino::initGrid(const int type) {
-
 	for (int row = 0; row < TETRIMINO_GRID_SIZE; row++) {
 		for (int col = 0; col < TETRIMINO_GRID_SIZE; col++) {
 			grid[row][col] = 0;
@@ -61,13 +49,13 @@ void Tetrimino::initGrid(const int type) {
 	}
 }
 
-void Tetrimino::printArray(int array[][TETRIMINO_GRID_SIZE]) {
-	for (int row = 0; row < TETRIMINO_GRID_SIZE; row++) {
-		for (int col = 0; col < TETRIMINO_GRID_SIZE; col++) {
-			cout << array[row][col];
-		}
-		cout << endl;
+int Tetrimino::randType() {
+	static bool firstTime = true;
+	if (firstTime) {
+		srand(static_cast<unsigned int>(time(NULL)));
+		firstTime = false;
 	}
+	return rand() % 7;
 }
 
 void Tetrimino::copyArray2D(const int sourceArray[][TETRIMINO_GRID_SIZE]) {
@@ -99,8 +87,7 @@ void Tetrimino::setLocation(Location newLocation) {
 }
 
 void Tetrimino::setLocation(int row, int col) {
-	location.row = row;
-	location.col = col;
+	location = { row, col };
 }
 
 void Tetrimino::rotateLeft() {
@@ -146,10 +133,20 @@ void Tetrimino::dataDump() {
 	cout << endl;
 }
 
+void Tetrimino::printArray(int array[][TETRIMINO_GRID_SIZE]) {
+	for (int row = 0; row < TETRIMINO_GRID_SIZE; row++) {
+		for (int col = 0; col < TETRIMINO_GRID_SIZE; col++) {
+			cout << array[row][col];
+		}
+		cout << endl;
+	}
+}
+
+// Class method tests
+/*
 int main() {
-
-	int tetriminoType = 2;
-
+	int tetriminoType = 3;
+	Location testLocation = { 2, 3 };
 	Tetrimino randomTetrimino;
 	Tetrimino myTetrimino(tetriminoType);
 
@@ -169,11 +166,11 @@ int main() {
 	randomTetrimino.printArray(gridOutput);
 	cout << endl;
 
-	randomTetrimino.setLocation({ 2, 3 });
+	randomTetrimino.setLocation(testLocation);
 	cout << "Set Location (using location variable) Data Dump\n";
 	randomTetrimino.dataDump();
 
-	randomTetrimino.setLocation(4, 1);
+	randomTetrimino.setLocation(testLocation.row, testLocation.col);
 	cout << "Set Location (using separate int variables) Data Dump\n";
 	randomTetrimino.dataDump();
 
@@ -203,3 +200,4 @@ int main() {
 
 	return 1;
 }
+*/

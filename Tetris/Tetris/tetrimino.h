@@ -60,7 +60,6 @@ public:
 	//mutators
 	void setLocation(Location newLocation); // modify location.row and location.col
 	void setLocation(int row, int col); // modify location.row and location.col
-
 	void rotateLeft();
 	void rotateRight();
 	void moveLeft();

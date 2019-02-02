@@ -144,9 +144,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="tetrimino.cpp" />
+    <ClCompile Include="Well.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tetrimino.h" />
+    <ClInclude Include="Well.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

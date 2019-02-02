@@ -18,9 +18,15 @@
     <ClCompile Include="tetrimino.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Well.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tetrimino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Well.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
