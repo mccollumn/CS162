@@ -1,0 +1,6 @@
+﻿  spaceObject.cpp
+c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(91): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(130): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(131): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Polygons.vcxproj -> C:\Users\mccollumn\source\repos\Polygons\Debug\Polygons.exe
