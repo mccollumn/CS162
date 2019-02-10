@@ -8,6 +8,8 @@
 
 #include <cmath>
 #include "spaceObject.h"
+#include "constants.h"
+#include <iostream>
 
 SpaceObject::SpaceObject() {
 	type = ASTEROID;
@@ -36,7 +38,6 @@ SpaceObject::SpaceObject(SpaceObjType type, double radius, Point location, Point
 	if (!setAngle(angle)) {
 		SpaceObject::angleDeg = 0;
 	}
-	
 }
 
 bool SpaceObject::setRadius(int radius) {
@@ -70,12 +71,9 @@ bool SpaceObject::setLocation(double x, double y) {
 }
 
 bool SpaceObject::setVelocity(double velocityX, double velocityY) {
-	if (velocityX >= 0 && velocityY >= 0) {
 		SpaceObject::velocity.x = velocityX;
 		SpaceObject::velocity.y = velocityY;
 		return true;
-	}
-	return false;
 }
 
 bool SpaceObject::setAngle(double angDeg) {
@@ -120,18 +118,111 @@ void SpaceObject::updatePosition() {
 	SpaceObject::setLocation(position.x, position.y);
 }
 
-// Method testing
-int main() {
-	SpaceObject testObj(ASTEROID, 10, { -125, 0 }, { 500, 1 }, 180);
-	testObj.changeAngle(185);
-
-	testObj.updatePosition();
-
-	double degree = 365;
-	int numTimesDivisible = degree / 360; // This works: equals 1 when degree is 365
-	int newDegree = (degree / 360) * 360; // This does not work: equals 365 when degree is 365?
-	int newDegree2 = (static_cast<int> (degree) / 360) * 360; // This works
-	int newDegreeCombined = numTimesDivisible * 360; // This works
-
-	return 1;
+void SpaceObject::draw(sf::RenderWindow& win) {
+	if (type == SHIP)
+		drawShip(win);
+	else
+		drawAsteroid(win);
 }
+
+void SpaceObject::applyThrust() {
+	double engineThrust = 0.05;
+	double forcex = cos((angleDeg - 90)*PI / 180) * engineThrust;
+	double forcey = sin((angleDeg - 90)*PI / 180) * engineThrust;
+	velocity.x = velocity.x + forcex;
+	velocity.y = velocity.y + forcey;
+}
+
+void SpaceObject::drawAsteroid(sf::RenderWindow& win) {
+	//Configure a graphics object to be used for drawing our object
+	//this code draws a simple pentagon.Feel free to modify it if you want.
+	int points = 5;
+	sf::CircleShape shape(radius, points); //radius from our SpaceObject
+
+	sf::Vector2f midpoint(radius, radius);
+	shape.setOrigin(midpoint);
+
+	shape.setFillColor(sf::Color(0, 0, 0));
+	shape.setOutlineThickness(1);
+	shape.setOutlineColor(sf::Color(255, 255, 255));
+
+	//apply our object position to the graphics object and draw it
+	shape.setPosition(location.x, location.y);
+	shape.setRotation(angleDeg);
+
+	win.draw(shape);
+
+	if (nearEdge(shape)) {
+		win.draw(oppositeShape(shape));
+	}
+}
+
+void SpaceObject::drawShip(sf::RenderWindow& win) {
+	sf::ConvexShape shipShape;
+	shipShape.setPointCount(3);
+	shipShape.setPoint(0, sf::Vector2f(10, 0));
+	shipShape.setPoint(1, sf::Vector2f(0, 25));
+	shipShape.setPoint(2, sf::Vector2f(20, 25));
+
+	sf::Vector2f midpoint(10, 15);
+	shipShape.setOrigin(midpoint);
+
+	shipShape.setFillColor(sf::Color(0, 0, 0));
+	shipShape.setOutlineThickness(1);
+	shipShape.setOutlineColor(sf::Color(255, 255, 255));
+
+	shipShape.setPosition(location.x, location.y);
+	shipShape.setRotation(angleDeg);
+	win.draw(shipShape);
+}
+
+bool SpaceObject::nearEdge(const sf::CircleShape& shape) {
+	sf::Vector2f currentPosition = shape.getPosition();
+	double radius = shape.getRadius();
+
+	if (SCREEN_WIDTH - currentPosition.x < radius) {
+		return true;
+	}
+	else if (currentPosition.x < radius) {
+		return true;
+	}
+	if (currentPosition.y < radius) {
+		return true;
+	}
+	else if (SCREEN_HEIGHT - currentPosition.y < radius) {
+		return true;
+	}
+	return false;
+}
+
+sf::CircleShape SpaceObject::oppositeShape(const sf::CircleShape& shape) {
+	sf::Vector2f currentPosition = shape.getPosition();
+	double radius = shape.getRadius();
+	sf::Vector2f oppositePosition = currentPosition;
+	sf::CircleShape oppositeShape = shape;
+
+	if (SCREEN_WIDTH - currentPosition.x < radius) {
+		oppositePosition.x = -(SCREEN_WIDTH - currentPosition.x);
+	}
+	else if (currentPosition.x < radius) {
+		oppositePosition.x = SCREEN_WIDTH + currentPosition.x;
+	}
+	if (currentPosition.y < radius) {
+		oppositePosition.y = SCREEN_HEIGHT + currentPosition.y;
+	}
+	else if (SCREEN_HEIGHT - currentPosition.y < radius) {
+		oppositePosition.y = -(SCREEN_HEIGHT - currentPosition.y);
+	}
+	oppositeShape.setPosition(oppositePosition.x, oppositePosition.y);
+	return oppositeShape;
+}
+
+// Method testing
+//int main() {
+//	SpaceObject testObj(ASTEROID, 10, { -125, 0 }, { 500, 1 }, 180);
+//	testObj.changeAngle(185);
+//
+//	testObj.updatePosition();
+//
+//	return 1;
+//}

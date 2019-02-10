@@ -1,6 +1,16 @@
-﻿  spaceObject.cpp
-c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(91): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(130): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(131): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+﻿  game.cpp
+  spaceObject.cpp
+c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(29): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(89): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(140): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(142): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(150): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(151): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(174): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\mccollumn\source\repos\polygons\polygons\spaceobject.cpp(175): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   Polygons.vcxproj -> C:\Users\mccollumn\source\repos\Polygons\Debug\Polygons.exe

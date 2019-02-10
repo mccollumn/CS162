@@ -32,7 +32,7 @@ bool Well::tetriminoFit(Tetrimino tetrimino) {
 			if (grid[row][col] == 1) {
 				int boardRow = row + location.row;
 				int boardCol = col + location.col;
-				if ((boardRow >= 0 && board[boardRow][boardCol] != ' ') || boardRow > height || boardCol < 0 || boardCol > width) {
+				if ((boardRow >= 0 && board[boardRow][boardCol] != ' ') || boardRow > height || boardCol < 0 || boardCol > width - 1) {
 					return false;
 				}
 			}
@@ -124,75 +124,75 @@ void Well::moveRowsDown(int FirstRowToMove) {
 }
 
 // Test class methods
-int main() {
-	Well testWell;
-	Tetrimino testTetrimino(3);
-
-	testTetrimino.setLocation(0, 0);
-	Location location = testTetrimino.getLocation();
-	testWell.tetriminoFit(testTetrimino);
-
-	testWell.addTetriminoToWell(testTetrimino);
-	cout << "Placed a square tetrimino at location: " << location.row << ", " << location.col << endl;
-	testWell.boardDump();
-
-	Tetrimino secondTetrimino(1);
-	secondTetrimino.setLocation(0, 0);
-	testWell.addTetriminoToWell(secondTetrimino);
-	cout << "Place another tetrimino on top of the existing one.\n";
-	cout << "It should fail and leave the board unmodified.\n";
-	testWell.boardDump();
-
-	secondTetrimino.setLocation(0, 4);
-	testWell.addTetriminoToWell(secondTetrimino);
-	cout << "Place another tetrimino next to the first.\n";
-	testWell.boardDump();
-
-	secondTetrimino.setLocation(0, 5);
-	testWell.addTetriminoToWell(secondTetrimino);
-	cout << "Attempt to add a tetrimino one square out of bounds to the right.\n";
-	cout << "It should fail and leave the board unmodified.\n";
-	testWell.boardDump();
-
-	secondTetrimino.setLocation(-2, 4);
-	testWell.addTetriminoToWell(secondTetrimino);
-	cout << "Place a tetrimino at the top of the board with part if it above the board.\n";
-	cout << "It should place the piece but part will not be visible.\n";
-	testWell.boardDump();
-
-	testTetrimino.setLocation(-10, 0);
-	testWell.addTetriminoToWell(testTetrimino);
-	cout << "Place a tetrimino way above the board.\n";
-	cout << "It should leave the board unmodified.\n";
-	testWell.boardDump();
-
-	testTetrimino.setLocation(22, 0);
-	testWell.addTetriminoToWell(testTetrimino);
-	cout << "Place a tetrimino one square out of bounds below the board.\n";
-	cout << "It should fail and leave the board unmodified.\n";
-	testWell.boardDump();
-
-	cout << "Top reached? " << testWell.topReached() << endl;
-
-	testTetrimino.setLocation(21, -1);
-	testWell.addTetriminoToWell(testTetrimino);
-	testTetrimino.setLocation(21, 1);
-	testWell.addTetriminoToWell(testTetrimino);
-	testTetrimino.setLocation(21, 3);
-	testWell.addTetriminoToWell(testTetrimino);
-	testTetrimino.setLocation(21, 5);
-	testWell.addTetriminoToWell(testTetrimino);
-	cout << "Fill the bottom of the board with square tetriminos\n";
-	testWell.boardDump();
-	
-	int rowsCleared = testWell.clearFullRows();
-	cout << "Clear " << rowsCleared << " full rows.\n";
-	testWell.boardDump();
-
-	cout << "Top reached? " << testWell.topReached() << endl;
-
-	char boardArr[WELL_HEIGHT][WELL_WIDTH];
-	testWell.getBoard(boardArr);
-
-	return 1;
-}
+//int main() {
+//	Well testWell;
+//	Tetrimino testTetrimino(3);
+//
+//	testTetrimino.setLocation(0, 0);
+//	Location location = testTetrimino.getLocation();
+//	testWell.tetriminoFit(testTetrimino);
+//
+//	testWell.addTetriminoToWell(testTetrimino);
+//	cout << "Placed a square tetrimino at location: " << location.row << ", " << location.col << endl;
+//	testWell.boardDump();
+//
+//	Tetrimino secondTetrimino(1);
+//	secondTetrimino.setLocation(0, 0);
+//	testWell.addTetriminoToWell(secondTetrimino);
+//	cout << "Place another tetrimino on top of the existing one.\n";
+//	cout << "It should fail and leave the board unmodified.\n";
+//	testWell.boardDump();
+//
+//	secondTetrimino.setLocation(0, 4);
+//	testWell.addTetriminoToWell(secondTetrimino);
+//	cout << "Place another tetrimino next to the first.\n";
+//	testWell.boardDump();
+//
+//	secondTetrimino.setLocation(0, 5);
+//	testWell.addTetriminoToWell(secondTetrimino);
+//	cout << "Attempt to add a tetrimino one square out of bounds to the right.\n";
+//	cout << "It should fail and leave the board unmodified.\n";
+//	testWell.boardDump();
+//
+//	secondTetrimino.setLocation(-2, 4);
+//	testWell.addTetriminoToWell(secondTetrimino);
+//	cout << "Place a tetrimino at the top of the board with part if it above the board.\n";
+//	cout << "It should place the piece but part will not be visible.\n";
+//	testWell.boardDump();
+//
+//	testTetrimino.setLocation(-10, 0);
+//	testWell.addTetriminoToWell(testTetrimino);
+//	cout << "Place a tetrimino way above the board.\n";
+//	cout << "It should leave the board unmodified.\n";
+//	testWell.boardDump();
+//
+//	testTetrimino.setLocation(22, 0);
+//	testWell.addTetriminoToWell(testTetrimino);
+//	cout << "Place a tetrimino one square out of bounds below the board.\n";
+//	cout << "It should fail and leave the board unmodified.\n";
+//	testWell.boardDump();
+//
+//	cout << "Top reached? " << testWell.topReached() << endl;
+//
+//	testTetrimino.setLocation(21, -1);
+//	testWell.addTetriminoToWell(testTetrimino);
+//	testTetrimino.setLocation(21, 1);
+//	testWell.addTetriminoToWell(testTetrimino);
+//	testTetrimino.setLocation(21, 3);
+//	testWell.addTetriminoToWell(testTetrimino);
+//	testTetrimino.setLocation(21, 5);
+//	testWell.addTetriminoToWell(testTetrimino);
+//	cout << "Fill the bottom of the board with square tetriminos\n";
+//	testWell.boardDump();
+//	
+//	int rowsCleared = testWell.clearFullRows();
+//	cout << "Clear " << rowsCleared << " full rows.\n";
+//	testWell.boardDump();
+//
+//	cout << "Top reached? " << testWell.topReached() << endl;
+//
+//	char boardArr[WELL_HEIGHT][WELL_WIDTH];
+//	testWell.getBoard(boardArr);
+//
+//	return 1;
+//}
