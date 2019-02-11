@@ -1,5 +1,13 @@
+/*
+@Filename:		game.cpp
+@Author:		Nick McCollum
+@Date:			2/11/2019
+@Version:		1.0
+@Dev env:		VS 2017
+@Description:	Main game class.
+*/
+
 #include "game.h"
-#include <iostream>
 
 Game::Game() {
 	window.create(
@@ -12,31 +20,28 @@ sf::Color Game::convertToSfmlColor(char color) {
 	switch (color) {
 	case 't':
 		return sf::Color::Cyan;
-		break;
 	case 'b':
 		return sf::Color::Blue;
-		break;
 	case 'o':
 		return sf::Color::Magenta;
-		break;
 	case 'y':
 		return sf::Color::Yellow;
-		break;
 	case 'g':
 		return sf::Color::Green;
-		break;
 	case 'p':
 		return sf::Color::Black;
-		break;
 	case 'r':
 		return sf::Color::Red;
-		break;
 	default:
 		return sf::Color::Transparent;
 	}
 }
 
-void Game::drawWell(Well gameWell, int top, int left, int blockWidth, sf::RectangleShape block, sf::RectangleShape well) {
+void Game::printError(std::string filename) {
+	std::cout << "Error: Cannot load " << filename << std::endl;
+}
+
+void Game::drawWell(Well gameWell, int top, int left, int blockWidth, sf::RectangleShape& block, sf::RectangleShape& well) {
 	char gameBoard[WELL_HEIGHT][WELL_WIDTH];
 	gameWell.getBoard(gameBoard);
 	int currentX = left;
@@ -65,7 +70,7 @@ void Game::drawWell(Well gameWell, int top, int left, int blockWidth, sf::Rectan
 	window.draw(well);
 }
 
-void Game::drawTetrimino(Tetrimino tetrimino, int top, int left, int blockWidth, sf::RectangleShape block) {
+void Game::drawTetrimino(Tetrimino tetrimino, int top, int left, int blockWidth, sf::RectangleShape& block) {
 	int grid[TETRIMINO_GRID_SIZE][TETRIMINO_GRID_SIZE];
 	tetrimino.getGrid(grid);
 	Location currentLocation = tetrimino.getLocation();
@@ -97,7 +102,7 @@ void Game::playGame() {
 	// Click sound
 	sf::SoundBuffer bufferClick;
 	if (!bufferClick.loadFromFile("click.wav")) {
-		std::cout << "Error: Cannot load click.wav" << std::endl;
+		printError("click.wav");
 	}
 	sf::Sound soundClick;
 	soundClick.setBuffer(bufferClick);
@@ -105,19 +110,28 @@ void Game::playGame() {
 	// Error sound
 	sf::SoundBuffer bufferError;
 	if (!bufferError.loadFromFile("error.wav")) {
-		std::cout << "Error: Cannot load error.wav" << std::endl;
+		printError("error.wav");
 	}
 	sf::Sound soundError;
 	soundError.setBuffer(bufferError);
+	soundError.setVolume(50.f);
 
 	// Music
 	sf::Music music;
 	if (!music.openFromFile("tetris.ogg")) {
-		std::cout << "Error: Cannot load tetris.ogg" << std::endl;
+		printError("tetris.oog");
 	}
 	music.setVolume(10.f);
 	music.setLoop(true);
 	music.play();
+
+	// Background image
+	sf::Texture texture;
+	if (!texture.loadFromFile("background.jpg")) {
+		printError("background.jpg");
+	}
+	sf::Sprite background;
+	background.setTexture(texture);
 
 	// Tetrimino block
 	sf::RectangleShape tetriminoBlock;
@@ -175,6 +189,7 @@ void Game::playGame() {
 		}
 
 		window.clear(sf::Color::White);
+		window.draw(background);
 		drawWell(gameWell, LAYOUT_BOARD_TOP, LAYOUT_BOARD_LEFT, BLOCK_SIZE_PIXELS, wellBlock, well);
 		drawTetrimino(tetriminoInPlay, LAYOUT_BOARD_TOP, LAYOUT_BOARD_LEFT, BLOCK_SIZE_PIXELS, tetriminoBlock);
 		window.display();

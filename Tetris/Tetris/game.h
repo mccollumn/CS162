@@ -1,3 +1,12 @@
+/*
+@Filename:		game.h
+@Author:		Nick McCollum
+@Date:			2/11/2019
+@Version:		1.0
+@Dev env:		VS 2017
+@Description:	Interface for game class.
+*/
+
 #pragma once
 
 #include "well.h"
@@ -5,6 +14,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 #include <string>
+#include <iostream>
 
 const int LAYOUT_WINDOW_WIDTH = 400;
 const int LAYOUT_WINDOW_HEIGHT = 500;
@@ -27,18 +37,25 @@ private:
 	sf::Color convertToSfmlColor(char color);
 
 	/*
+	printError: Prints error meassge to std output
+	@param: string name of file that didn't load
+	@return: none
+	*/
+	void printError(std::string filename);
+
+	/*
 	drawWell: Draws a well object in the SFML window
 	@param: Well gameWell, int pixels from top, int pixels from left, int pixel width of block
 	@return: none
 	*/
-	void drawWell(Well gameWell, int top, int left, int blockWidth, sf::RectangleShape block, sf::RectangleShape well);
+	void drawWell(Well gameWell, int top, int left, int blockWidth, sf::RectangleShape& block, sf::RectangleShape& well);
 
 	/*
 	drawTetrimino: Draws a tetrimino objec
 	@param: Tetrimino, int pixels from top, int pixels from left, int pixel width of block
 	@return: none
 	*/
-	void drawTetrimino(Tetrimino tetrimino, int top, int left, int blockWidth, sf::RectangleShape block);
+	void drawTetrimino(Tetrimino tetrimino, int top, int left, int blockWidth, sf::RectangleShape& block);
 
 public:
 	Game();
