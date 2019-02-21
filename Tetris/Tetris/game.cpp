@@ -81,7 +81,7 @@ void Game::drawTetrimino(Tetrimino tetrimino, int top, int left, int blockWidth,
 	for (int row = 0; row < TETRIMINO_GRID_SIZE; row++) {
 		for (int col = 0; col < TETRIMINO_GRID_SIZE; col++) {
 			block.setPosition(currentX, currentY);
-			if (grid[row][col] == 1) {
+			if (grid[row][col] == 1 && currentY >= 0) {
 				block.setFillColor(convertToSfmlColor(color));
 				block.setOutlineThickness(1);
 			}
