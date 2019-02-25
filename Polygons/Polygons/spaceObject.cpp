@@ -85,13 +85,15 @@ bool SpaceObject::setAngle(double angDeg) {
 }
 
 void SpaceObject::changeAngle(double deltaDeg) {
-	double degree = SpaceObject::angleDeg + deltaDeg;
-	int numTimesDivisible = std::abs(degree / 360);
-	if (degree < 0) {
-		SpaceObject::angleDeg = (degree + (numTimesDivisible * 360)) + 360;
-	}
-	else {
-		SpaceObject::angleDeg = degree - (numTimesDivisible * 360);
+	if (type == SHIP) {
+		double degree = SpaceObject::angleDeg + deltaDeg;
+		int numTimesDivisible = std::abs(degree / 360);
+		if (degree < 0) {
+			SpaceObject::angleDeg = (degree + (numTimesDivisible * 360)) + 360;
+		}
+		else {
+			SpaceObject::angleDeg = degree - (numTimesDivisible * 360);
+		}
 	}
 }
 
@@ -121,16 +123,21 @@ void SpaceObject::updatePosition() {
 void SpaceObject::draw(sf::RenderWindow& win) {
 	if (type == SHIP)
 		drawShip(win);
+	else if (type == SHIP_EXPLODING) {
+		drawExplodingShip(win);
+	}
 	else
 		drawAsteroid(win);
 }
 
 void SpaceObject::applyThrust() {
-	double engineThrust = 0.05;
-	double forcex = cos((angleDeg - 90)*PI / 180) * engineThrust;
-	double forcey = sin((angleDeg - 90)*PI / 180) * engineThrust;
-	velocity.x = velocity.x + forcex;
-	velocity.y = velocity.y + forcey;
+	if (type == SHIP) {
+		double engineThrust = 0.05;
+		double forcex = cos((angleDeg - 90)*PI / 180) * engineThrust;
+		double forcey = sin((angleDeg - 90)*PI / 180) * engineThrust;
+		velocity.x = velocity.x + forcex;
+		velocity.y = velocity.y + forcey;
+	}
 }
 
 void SpaceObject::drawAsteroid(sf::RenderWindow& win) {
@@ -215,6 +222,26 @@ sf::CircleShape SpaceObject::oppositeShape(const sf::CircleShape& shape) {
 	}
 	oppositeShape.setPosition(oppositePosition.x, oppositePosition.y);
 	return oppositeShape;
+}
+
+void SpaceObject::explode() {
+	type = SHIP_EXPLODING;
+	velocity = { 0, 0 };
+}
+
+void SpaceObject::drawExplodingShip(sf::RenderWindow& win) {
+	static double explosionSize = radius;
+	sf::CircleShape explosion(explosionSize);
+	explosion.setFillColor(sf::Color::White);
+	explosion.setOrigin(explosionSize, explosionSize);
+	explosion.setPosition(location.x, location.y);
+	if (explosionSize <= EXPLOSION_RADIUS) {
+		win.draw(explosion);
+		explosionSize += 0.1;
+	}
+	else {
+		type = SHIP_GONE;
+	}
 }
 
 // Method testing

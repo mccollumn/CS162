@@ -1,8 +1,8 @@
 /*
 @Filename:		game.h
 @Author:		Nick McCollum
-@Date:			2/11/2019
-@Version:		1.0
+@Date:			2/24/2019
+@Version:		2.0
 @Dev env:		VS 2017
 @Description:	Interface for game class.
 */
@@ -70,11 +70,11 @@ private:
 	void printError(std::string filename);
 
 	/*
-	updateLevel: Checks the score and increases the game level if necessary
-	@param: none
+	updateLevel: Checks the rows cleared and increases the game level if necessary
+	@param: int Rows Cleared
 	@return: none
 	*/
-	void updateLevel();
+	void updateLevel(int rowsCleared);
 
 	/*
 	processSplash: Displays a splash screen
@@ -127,6 +127,8 @@ private:
 
 public:
 	Game();
+
+	~Game();
 
 	/*
 	playGame: Polls for events and draws game well and tetrimino

@@ -14,7 +14,7 @@ struct Point {
 	double y;
 };
 
-enum SpaceObjType { SHIP, ASTEROID, PHOTON_TORPEDO };
+enum SpaceObjType { SHIP, ASTEROID, PHOTON_TORPEDO, SHIP_EXPLODING, SHIP_GONE};
 
 class SpaceObject {
 
@@ -59,6 +59,8 @@ public:
 	*/
 	void draw(sf::RenderWindow& win);
 
+	void explode();
+
 	void applyThrust();
 
 private:
@@ -95,5 +97,9 @@ private:
 	@return: sf::CircleShape Opposite shape
 	*/
 	sf::CircleShape oppositeShape(const sf::CircleShape& shape);
+
+	
+
+	void drawExplodingShip(sf::RenderWindow& win);
 };
 

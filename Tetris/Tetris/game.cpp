@@ -1,8 +1,8 @@
 /*
 @Filename:		game.cpp
 @Author:		Nick McCollum
-@Date:			2/11/2019
-@Version:		1.0
+@Date:			2/24/2019
+@Version:		2.0
 @Dev env:		VS 2017
 @Description:	Main game class.
 */
@@ -48,6 +48,12 @@ Game::Game() {
 		sf::Style::Titlebar | sf::Style::Close);
 }
 
+Game::~Game() {
+	delete tetriminoInPlay;
+	delete tetriminoNext;
+	delete gameWell;
+}
+
 sf::Color Game::convertToSfmlColor(char color) {
 	switch (color) {
 	case 't':
@@ -73,16 +79,21 @@ void Game::printError(std::string filename) {
 	std::cout << "Error: Cannot load " << filename << std::endl;
 }
 
-void Game::updateLevel() {
-	int increase = score / ROWS_PER_LEVEL;
-	if (increase >= level) {
-		level += increase;
-		for (int x = 0; x < increase; x++) {
+void Game::updateLevel(int rowsCleared) {
+	static int previousRowTotal = 0;
+	static int previousLevel = level;
+	int totalRows = previousRowTotal + rowsCleared;
+	level = (totalRows / ROWS_PER_LEVEL) + 1;
+	int levelIncrease = level - previousLevel;
+	if (levelIncrease > 0) {
+		for (int x = 0; x < levelIncrease; x++) {
 			currentDropRate -= currentDropRate * DROP_RATE_PER_LEVEL;
 			currentMusicPitch += currentMusicPitch * MUSIC_RATE_PER_LEVEL;
 		}
 		music.setPitch(currentMusicPitch);
 	}
+	previousRowTotal = totalRows;
+	previousLevel = level;
 }
 
 void Game::processSplash() {
@@ -255,14 +266,13 @@ void Game::processGame() {
 				if (rowsCleared == 4) {
 					soundClear.play();
 					score += rowsCleared * TETRIS_MULTIPLIER;
-					updateLevel();
 				}
 				else if (rowsCleared > 0) {
 					soundClear.play();
 					score += rowsCleared;
-					updateLevel();
 				}
 				if (!gameWell->topReached()) {
+					updateLevel(rowsCleared);
 					tetriminoInPlay = tetriminoNext;
 					tetriminoInPlay->setLocation(TETRIMINO_START_LOCATION);
 					tetriminoNext = new Tetrimino;

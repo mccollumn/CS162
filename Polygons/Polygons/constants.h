@@ -9,4 +9,7 @@
 
 const int SCREEN_WIDTH = 400;
 const int SCREEN_HEIGHT = 400;
+const double EXPLOSION_RADIUS = 25;
+const int MAX_ASTEROIDS = 20;
+
 const double PI = 3.14159265359;
