@@ -1,13 +1,18 @@
-﻿  game.cpp
-c:\users\mccollumn\source\repos\tetris\tetris\game.h(37): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(354): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(371): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(385): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(410): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(427): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  Well.cpp
+  game.cpp
+c:\users\mccollumn\source\repos\tetris\tetris\game.h(40): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(93): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(104): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(416): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(433): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(434): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(450): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(457): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(494): warning C4326: return type of 'main' should be 'int' instead of 'void'
+c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(447): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(472): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(489): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(495): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(496): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(512): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(519): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\mccollumn\source\repos\tetris\tetris\game.cpp(590): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  tetrimino.cpp
+  Generating Code...
   Tetris.vcxproj -> C:\Users\mccollumn\source\repos\Tetris\Debug\Tetris.exe

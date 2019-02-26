@@ -20,6 +20,7 @@ struct Location {
 class Tetrimino {
 private:
 	int grid[TETRIMINO_GRID_SIZE][TETRIMINO_GRID_SIZE]; //contains only zeros and ones 
+	int tetriminoType;
 	char color;
 	Location location;
 
@@ -55,6 +56,7 @@ public:
 	char getColor(); // returns the color of the tetrimino object
 	Location getLocation(); // return the location of the Tetrimino
 	void getGrid(int gridOut[][TETRIMINO_GRID_SIZE]);  // return the grid of the Tetrimino 
+	int getType();	// return the type of the Tetrimino
 
 	//---------------------------------------------
 	//mutators

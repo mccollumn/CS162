@@ -23,6 +23,7 @@ Tetrimino::Tetrimino(int type) {
 	}
 
 	initGrid(type);
+	tetriminoType = type;
 
 	char colors[NUM_TETRIMINOS] = { 't', 'b', 'o', 'y', 'g', 'p', 'r' };
 	color = colors[type];
@@ -80,6 +81,10 @@ void Tetrimino::getGrid(int gridOut[][TETRIMINO_GRID_SIZE]) {
 			gridOut[row][col] = grid[row][col];
 		}
 	}
+}
+
+int Tetrimino::getType() {
+	return tetriminoType;
 }
 
 void Tetrimino::setLocation(Location newLocation) {

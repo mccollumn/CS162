@@ -24,10 +24,13 @@ const int LAYOUT_NEXT_TOP = 10;
 const int LAYOUT_NEXT_LEFT = 50;
 const int LAYOUT_NEXT_WIDTH = 100;
 const int LAYOUT_NEXT_HEIGHT = 100;
+const int LAYOUT_NEXT_TITLE_HEIGHT = 25;
 const int LAYOUT_SCORE_TOP = 200;
 const int LAYOUT_SCORE_LEFT = 50;
 const int LAYOUT_SCORE_WIDTH = 100;
 const int LAYOUT_SCORE_HEIGHT = 50;
+const int LAYOUT_PAUSE_WIDTH = 200;
+const int LAYOUT_PAUSE_HEIGHT = 200;
 const int BLOCK_SIZE_PIXELS = 20;
 const int TETRIS_MULTIPLIER = 2;
 const Location TETRIMINO_START_LOCATION = { -2, 2 };
@@ -37,6 +40,11 @@ const float DROP_RATE_PER_LEVEL = 0.5;		// Set high for demo purposes. You proba
 const float MUSIC_RATE_PER_LEVEL = 0.1;
 
 enum GameState { TETRIS_SPLASH, TETRIS_PLAY, TETRIS_GAME_OVER };
+
+struct Dimensions {
+	int width;
+	int height;
+};
 
 class Game
 {
@@ -68,6 +76,20 @@ private:
 	@return: none
 	*/
 	void printError(std::string filename);
+
+	/*
+	getTetriminoCenter: Determines the center point of the tetrimino on the grid
+	@param: Tetrimino pointer, int Tetrimino Block Width
+	@return: Location Center Point
+	*/
+	Location getTetriminoCenter(Tetrimino* tetrimino, int blockWidth);
+
+	/*
+	getTetriminoDimensions: Determines the tetrimino dimensions in pixels
+	@param: Tetrimino pointer, int Tetrimino Block Width
+	@return: Dimensions Width and Height
+	*/
+	Dimensions getTetriminoDimensions(Tetrimino* tetrimino, int blockWidth);
 
 	/*
 	updateLevel: Checks the rows cleared and increases the game level if necessary
@@ -124,6 +146,13 @@ private:
 	@return: none
 	*/
 	void drawNext(Tetrimino* tetrimino, int top, int left);
+
+	/*
+	drawPause: Display for the pause box
+	@param: none
+	@return: none
+	*/
+	void drawPause();
 
 public:
 	Game();

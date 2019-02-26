@@ -49,9 +49,15 @@ Game::Game() {
 }
 
 Game::~Game() {
-	delete tetriminoInPlay;
-	delete tetriminoNext;
-	delete gameWell;
+	if (tetriminoInPlay) {
+		delete tetriminoInPlay;
+	}
+	if (tetriminoNext) {
+		delete tetriminoNext;
+	}
+	if (gameWell) {
+		delete gameWell;
+	}
 }
 
 sf::Color Game::convertToSfmlColor(char color) {
@@ -77,6 +83,59 @@ sf::Color Game::convertToSfmlColor(char color) {
 
 void Game::printError(std::string filename) {
 	std::cout << "Error: Cannot load " << filename << std::endl;
+}
+
+Location Game::getTetriminoCenter(Tetrimino* tetrimino, int blockWidth) {
+	int type = tetrimino->getType();
+	Location center = {};
+
+	if (type == 0) {
+		center.row = 1.5 * blockWidth;
+		center.col = 2 * blockWidth;
+		return center;
+	}
+	else {
+		center.row = 2 * blockWidth;
+	}
+	if (type == 3) {
+		center.col = 2 * blockWidth;
+	}
+	else {
+		center.col = 2.5 * blockWidth;
+	}
+	return center;
+}
+
+Dimensions Game::getTetriminoDimensions(Tetrimino* tetrimino, int blockWidth) {
+	int grid[TETRIMINO_GRID_SIZE][TETRIMINO_GRID_SIZE];
+	tetrimino->getGrid(grid);
+	Dimensions tetriminoSize = {};
+	int rowTop = 0;
+	int rowBottom = 0;
+	int colLeft = 0;
+	int colRight = 0;
+
+	for (int row = 0; row < TETRIMINO_GRID_SIZE; row++) {
+		for (int col = 0; col < TETRIMINO_GRID_SIZE; col++) {
+			if (grid[row][col] == 1) {
+				if (row < rowTop) {
+					rowTop = row;
+				}
+				if (row > rowBottom) {
+					rowBottom = row;
+				}
+				if (col < colLeft) {
+					colLeft = col;
+				}
+				if (col > colRight) {
+					colRight = col;
+				}
+			}
+		}
+	}
+	tetriminoSize.width = (colRight - colLeft) * blockWidth;
+	tetriminoSize.height = (rowBottom - rowTop) * blockWidth;
+	return tetriminoSize;
 }
 
 void Game::updateLevel(int rowsCleared) {
@@ -287,6 +346,9 @@ void Game::processGame() {
 		drawWell(gameWell, LAYOUT_BOARD_TOP, LAYOUT_BOARD_LEFT, BLOCK_SIZE_PIXELS, wellBlock, well);
 		drawTetrimino(tetriminoInPlay, LAYOUT_BOARD_TOP, LAYOUT_BOARD_LEFT, BLOCK_SIZE_PIXELS, tetriminoBlock);
 		drawScore(score, LAYOUT_SCORE_TOP, LAYOUT_SCORE_LEFT);
+		if (paused) {
+			drawPause();
+		}
 		window.display();
 	}
 }
@@ -454,12 +516,46 @@ void Game::drawNext(Tetrimino* tetrimino, int top, int left) {
 	border.setOutlineColor(sf::Color::Black);
 	border.setOutlineThickness(1);
 	border.setFillColor(sf::Color::White);
-	border.setPosition(left, top + 25);
+	border.setPosition(left, top + LAYOUT_NEXT_TITLE_HEIGHT);
 
 	window.draw(text);
 	window.draw(border);
-	//TODO: Center the piece. Different pieces sit slightly differntly in the grid.
-	drawTetrimino(tetriminoNext, top + 35, left + 5, BLOCK_SIZE_PIXELS, tetriminoBlock);
+
+	// Center the next piece. Different pieces sit slightly differntly in the grid.
+	Location center = getTetriminoCenter(tetrimino, BLOCK_SIZE_PIXELS);
+	Location layoutCenter = {};
+	layoutCenter.col = LAYOUT_NEXT_WIDTH / 2;
+	layoutCenter.row = ((LAYOUT_NEXT_HEIGHT - LAYOUT_NEXT_TITLE_HEIGHT) / 2) + LAYOUT_NEXT_TITLE_HEIGHT;
+	int offsetLeft = ((TETRIMINO_GRID_SIZE * BLOCK_SIZE_PIXELS) / 2) - center.col + 10;
+	int offsetTop = ((TETRIMINO_GRID_SIZE * BLOCK_SIZE_PIXELS) / 2) - center.row + 10;
+	drawTetrimino(tetriminoNext, LAYOUT_NEXT_TOP + offsetTop + LAYOUT_NEXT_TITLE_HEIGHT, LAYOUT_NEXT_LEFT + offsetLeft, BLOCK_SIZE_PIXELS, tetriminoBlock);
+}
+
+void Game::drawPause() {
+	sf::RectangleShape box(sf::Vector2f(LAYOUT_PAUSE_WIDTH, LAYOUT_PAUSE_HEIGHT));
+	box.setOutlineColor(sf::Color::Black);
+	box.setOutlineThickness(1);
+	box.setFillColor(sf::Color::White);
+	box.setOrigin(LAYOUT_PAUSE_WIDTH / 2.0f, LAYOUT_PAUSE_HEIGHT / 2.0f);
+	box.setPosition(LAYOUT_WINDOW_WIDTH / 2.0f, LAYOUT_WINDOW_HEIGHT / 2.0f);
+
+	sf::Text text;
+	text.setFont(font);
+	text.setString("PAUSED");
+	text.setCharacterSize(40);
+	text.setFillColor(sf::Color::Black);
+	sf::FloatRect textRect = text.getLocalBounds();
+	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+	text.setPosition(sf::Vector2f(LAYOUT_WINDOW_WIDTH / 2.0f, LAYOUT_WINDOW_HEIGHT / 2.25f));
+
+	window.draw(box);
+	window.draw(text);
+	text.setString("Press <P> to resume");
+	text.setCharacterSize(20);
+	textRect = text.getLocalBounds();
+	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+	text.setPosition(sf::Vector2f(LAYOUT_WINDOW_WIDTH / 2.0f, LAYOUT_WINDOW_HEIGHT / 1.75f));
+	window.draw(text);
 }
 
 void Game::playGame() {
