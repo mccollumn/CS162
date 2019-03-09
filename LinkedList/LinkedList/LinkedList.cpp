@@ -1,3 +1,12 @@
+/*
+@Filename:		LinkedList.cpp
+@Author:		Nick McCollum
+@Date:			3/9/2019
+@Version:		1.0
+@Dev env:		VS 2017
+@Description:	Implementation of LinkedList class
+*/
+
 #include "LinkedList.h"
 
 LinkedList::LinkedList() {
@@ -49,76 +58,6 @@ bool LinkedList::insert(std::string value) {
 	return true;
 }
 
-/*
-bool LinkedList::insert(std::string value) {
-	Node* newNode = new Node;
-	newNode->next = nullptr;
-	newNode->data = value;
-
-	if (head == nullptr) {
-		head = newNode;
-	}
-	else {
-		Node* current = head;
-		Node* previous = nullptr;
-
-		// If list has only one item
-		if (current->next == nullptr) {
-			if (current->data == value) {
-				return false;
-			}
-			if (current->data > value) {
-				// Add before current node
-				head = newNode;
-				newNode->next = current;
-			}
-			else {
-				// Add after current node
-				current->next = newNode;
-			}
-			return true;
-		}
-
-		// If the list has more than one item, traverse it
-		while (current->next != nullptr) {
-			if (current->data == value) {
-				return false;
-			}
-			if (current->data > value) {
-				// Add before current node
-				newNode->next = current;
-				if (previous != nullptr) {
-					previous->next = newNode;
-				}
-				
-			}
-			previous = current;
-			current = current->next;
-		}
-		// If we have reached the last item in the list...
-		if (current->data > value) {
-			// Add before current node
-			previous->next = newNode;
-			newNode->next = current;
-		}
-		else {
-			// Add after current node
-			current->next = newNode;
-		}
-		
-	}
-	return true;
-
-	// Insert after current node
-	// newNode->next = current->next;
-	// current->next = newNode;
-
-	// Insert between previous and current
-	// newNode->next = previous;
-	// current->next = newNode;
-}
-*/
-
 bool LinkedList::remove(std::string value) {
 	// The list is empty
 	if (head == nullptr) {
@@ -150,7 +89,6 @@ bool LinkedList::remove(std::string value) {
 				length--;
 			}
 			// The value is not in the list
-			// Is this needed?
 			else {
 				return false;
 			}
